@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="/" />
+
+  <meta charset="UTF-8" />
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible" />
+  <meta name="description" content="PWA Bank from Surf." />
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="apple-mobile-web-app-title" content="Surf Bank" />
+  <meta name="theme-color" content="transparent" />
+  <link rel="apple-touch-icon" href="icons/Icon-192.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png" />
+
+  <title>Surf Bank</title>
+  <link rel="manifest" href="manifest.json" />
+  <!-- This script adds the flutter initialization JS code -->
+  <script src="flutter.js" defer=""></script>
+  <link rel="stylesheet" href="style/style.css" />
+  <link rel="stylesheet" type="text/css" href="splash/style.css" />
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+  <script src="splash/splash.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-messaging-compat.js"></script>
+</head>
+
+<body>
+  <picture id="splash">
+    <source srcset="
+          splash/img/light-1x.png 1x,
+          splash/img/light-2x.png 2x,
+          splash/img/light-3x.png 3x,
+          splash/img/light-4x.png 4x
+        " media="(prefers-color-scheme: light)" />
+    <source srcset="
+          splash/img/dark-1x.png 1x,
+          splash/img/dark-2x.png 2x,
+          splash/img/dark-3x.png 3x,
+          splash/img/dark-4x.png 4x
+        " media="(prefers-color-scheme: dark)" />
+    <img class="center" aria-hidden="true" src="splash/img/light-1x.png" alt="" />
+  </picture>
+  <div id="bottom">
+    <svg class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+      <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+    </svg>
+  </div>
+  <script src="script/loading.js"></script>
+  <script src="script/canvas_color.js"></script>
+  <script src="script/configure_app_helper.js" type="application/javascript"></script>
+  <script src="script/auth.js" type="application/javascript"></script>
+  <script src="script/check_pwa.js" type="application/javascript"></script>
+  <script src="script/get_contact.js" type="application/javascript"></script>
+
+  <!-- This script adds ZXing for mobile_scanner plugin -->
+  <script src="https://unpkg.com/@zxing/library@0.19.1" type="application/javascript"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("/firebase-messaging-sw.js");
+
+        // Wait for registration to finish before dropping the <script> tag.
+        // Otherwise, the browser will load the script multiple times,
+        // potentially different versions.
+
+        serviceWorkerVersion = '1';
+        var serviceWorkerUrl =
+          "flutter_service_worker.js?v=" + serviceWorkerVersion;
+      });
+    }
+  </script>
+</body>
+
+</html>
